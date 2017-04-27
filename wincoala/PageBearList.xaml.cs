@@ -20,9 +20,13 @@ namespace wincoala
     /// </summary>
     public partial class PageBearList : Page
     {
+        List<BearMetadata> bearList;
+
         public PageBearList()
         {
+            bearList = WincoalaCore.Instance.getBearList();
             InitializeComponent();
+            testItem.ItemsSource = bearList;
         }
     }
 }
