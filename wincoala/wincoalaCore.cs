@@ -5,6 +5,7 @@ using System.Net;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using System.Text;
 
 namespace wincoala
 {
@@ -41,6 +42,25 @@ namespace wincoala
                 newBear.name = bear.Key;
                 result.Add(newBear);
             }
+
+            return result;
+        }
+
+        public List<Result> lintOnline(LintRequest request)
+        {
+            // API call
+            HttpContent content = new StringContent(JsonConvert.SerializeObject(request), Encoding.UTF8, "application/json");
+            String test = JsonConvert.SerializeObject(request);
+            Trace.WriteLine(test);
+            HttpResponseMessage response = this.apiClient.PostAsync("editor/", content).Result;
+            response.EnsureSuccessStatusCode();
+            string resultAsString = response.Content.ReadAsStringAsync().Result;
+
+            // Convert JSON to List<Result>
+            LintResponse bearsData =
+                JsonConvert.DeserializeObject<LintResponse>(resultAsString);
+            // "default" is the default section name used in coala result
+            List<Result> result = bearsData.results["default"];
 
             return result;
         }

@@ -15,7 +15,24 @@ namespace wincoala
 
     public struct LintRequest
     {
-        public List<String> bears;
-        public String fileData;
+        public String bears;
+        public String file_data;
     }
+
+    public struct LintResponse
+    {
+        public Dictionary<String, List<Result>> results;
+        public String success;
+    }
+
+    public struct Result
+    {
+        public String message; 
+        public String origin;
+        public int severity;
+        // K = diff unit
+        // V = the diff itself
+        public Dictionary<String, String> diffs; 
+    }
+
 }
