@@ -11,6 +11,18 @@ namespace wincoala
         public String name;
         public String desc;
         public List<String> languages;
+        public string Name
+        {
+            get { return name; }
+        }
+        public string Description
+        {
+            get { return desc; }
+        }
+        public string Languages
+        {
+            get { return string.Join(",", languages); }
+        }
     }
 
     public struct LintRequest
