@@ -19,11 +19,15 @@ namespace wincoala
                 {
                     AutomaticDecompression = DecompressionMethods.GZip | DecompressionMethods.Deflate
                 });
+            this.apiClient.DefaultRequestHeaders
+                  .Accept
+                  .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.apiClient.BaseAddress = new Uri("https://webservices.coala.io/");
         }
 
         public List<BearMetadata> getBearList()
         {
+            // API call
             HttpResponseMessage response = this.apiClient.GetAsync("list/bears").Result;
             response.EnsureSuccessStatusCode();
             string resultAsString = response.Content.ReadAsStringAsync().Result;
