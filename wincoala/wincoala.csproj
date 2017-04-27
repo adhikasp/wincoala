@@ -75,6 +75,12 @@
       <SubType>Designer</SubType>
     </ApplicationDefinition>
     <Compile Include="DataModel.cs" />
+    <Compile Include="PageBearList.xaml.cs">
+      <DependentUpon>PageBearList.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="PageLintOnline.xaml.cs">
+      <DependentUpon>PageLintOnline.xaml</DependentUpon>
+    </Compile>
     <Compile Include="wincoalaCore.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
@@ -88,6 +94,14 @@
       <DependentUpon>MainWindow.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
+    <Page Include="PageBearList.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="PageLintOnline.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Properties\AssemblyInfo.cs">

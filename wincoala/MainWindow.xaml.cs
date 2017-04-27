@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -24,7 +25,17 @@ namespace wincoala
         {
             InitializeComponent();
             WincoalaCore wincoalaCore = new WincoalaCore();
-            DebugOutput.Content = wincoalaCore.getBearList();
+            MainFrame.Content = new PageLintOnline();
+        }
+
+        private void ButtonLintOnline_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new PageLintOnline();
+        }
+
+        private void ButtonBearList_Click(object sender, RoutedEventArgs e)
+        {
+            MainFrame.Content = new PageBearList();
         }
     }
 }
