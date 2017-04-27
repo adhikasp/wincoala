@@ -11,7 +11,24 @@ namespace wincoala
 {
     public class WincoalaCore
     {
+        private static WincoalaCore instance;
+
         private HttpClient apiClient;
+
+        /**
+         * Singleton
+         */
+        public static WincoalaCore Instance
+        {
+            get
+            {
+                if (instance == null)
+                {
+                    instance = new WincoalaCore();
+                }
+                return instance;
+            }
+        }
 
         public WincoalaCore()
         {
