@@ -1,12 +1,10 @@
 ![Coala Logo](https://cloud.githubusercontent.com/assets/5716520/24838296/a9cf5f04-1d45-11e7-855c-47b816ce1e09.png)
 
-=====
-
-## Description
+------------------------------------------------------------------------------
 
 wincoala is [coala](https://github.com/coala/coala) GUI for Windows. 
 This program was writen for my university class of *Praktikum Basis Data*
-(Object Oriented Programming Class)
+(Object Oriented Programming Class).
 
 ### Features
 
