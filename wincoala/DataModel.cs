@@ -1,4 +1,5 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -6,23 +7,27 @@ using System.Threading.Tasks;
 
 namespace wincoala
 {
-    public struct BearMetadata
+    public class BearMetadata
     {
-        public String name;
-        public String desc;
-        public List<String> languages;
-        public string Name
+        [PrimaryKey]
+        public String Name { get; set; }
+        public String Description { get; set; }
+        public String Languages { get; set; } 
+        public List<String> LanguagesAsList
         {
-            get { return name; }
+            get { return Languages.Split(',').ToList<string>(); }
         }
-        public string Description
+        public void setLanguagesFromList(List<String> languages)
         {
-            get { return desc; }
+            Languages = string.Join(",", languages);
         }
-        public string Languages
-        {
-            get { return string.Join(",", languages); }
-        }
+    }
+
+    public struct BearListResponse
+    {
+        public String name { get; set; }
+        public String desc { get; set; }
+        public List<String> languages { get; set; } 
     }
 
     public struct LintRequest

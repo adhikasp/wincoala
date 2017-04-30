@@ -51,12 +51,15 @@ namespace wincoala
             string resultAsString = response.Content.ReadAsStringAsync().Result;
                 
             // Convert JSON -> Dict<bearName, BearMetadata> -> List<BearMetadata>
-            Dictionary<String, BearMetadata> bearsData = 
-                JsonConvert.DeserializeObject<Dictionary<String, BearMetadata>>(resultAsString);
+            Dictionary<String, BearListResponse> bearsData =
+                JsonConvert.DeserializeObject<Dictionary<String, BearListResponse>>(resultAsString);
             List<BearMetadata> result = new List<BearMetadata>();
-            foreach(KeyValuePair<String, BearMetadata> bear in bearsData) {
-                BearMetadata newBear = bear.Value;
-                newBear.name = bear.Key;
+            foreach (KeyValuePair<String, BearListResponse> bear in bearsData)
+            {
+                BearMetadata newBear = new BearMetadata();
+                newBear.Name = bear.Key;
+                newBear.Description = bear.Value.desc;
+                newBear.setLanguagesFromList(bear.Value.languages);
                 result.Add(newBear);
             }
 
