@@ -11,8 +11,9 @@ namespace wincoala
 {
     public class WincoalaCore
     {
-        private static WincoalaCore instance;
+        private static WincoalaCore instance; 
 
+        private Persistence persistenceLayer;
         private HttpClient apiClient;
 
         /**
@@ -32,6 +33,8 @@ namespace wincoala
 
         public WincoalaCore()
         {
+            this.persistenceLayer = Persistence.Instance;
+
             this.apiClient = new HttpClient(
                 new HttpClientHandler
                 {
@@ -41,12 +44,21 @@ namespace wincoala
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.apiClient.BaseAddress = new Uri("https://webservices.coala.io/");
-
-            Persistence test = Persistence.Instance;
         }
 
-        public List<BearMetadata> getBearList()
+        public List<BearMetadata> getBearList(Boolean forceSync = false)
         {
+            if (!forceSync)
+            {
+                List<BearMetadata> cachedBear = persistenceLayer.getAllBear();
+                if (cachedBear.Count > 0)
+                {
+                    Trace.WriteLine("Get bear data from cache.");
+                    return cachedBear;
+                }
+            }
+            Trace.WriteLine("Get bear data from internet.");
+
             // API call
             HttpResponseMessage response = this.apiClient.GetAsync("list/bears").Result;
             response.EnsureSuccessStatusCode();
@@ -65,6 +77,8 @@ namespace wincoala
                 result.Add(newBear);
             }
 
+            // Cache bear list to DB
+            persistenceLayer.saveBear(result);
             return result;
         }
 

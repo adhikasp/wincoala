@@ -36,12 +36,19 @@ namespace wincoala
             // Setup DB
             dbConnection.CreateTable<BearMetadata>();
             dbConnection.DeleteAll<BearMetadata>();
+        }
 
-            BearMetadata bear = new BearMetadata();
-            bear.Name = "test";
-            dbConnection.Insert(bear);
-            Trace.WriteLine("Ini lho");
-            Trace.WriteLine(dbConnection.Table<BearMetadata>().First().Name);
+        public List<BearMetadata> getAllBear()
+        {
+            return dbConnection.Table<BearMetadata>().ToList();
+        }
+
+        public Boolean saveBear(List<BearMetadata> bears)
+        {
+            // Always drop existing cache.
+            dbConnection.DeleteAll<BearMetadata>();
+            // Make sure something is saved to db.
+            return dbConnection.InsertAll(bears) != 0;
         }
 
     }
