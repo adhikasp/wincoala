@@ -41,6 +41,8 @@ namespace wincoala
                   .Accept
                   .Add(new MediaTypeWithQualityHeaderValue("application/json"));
             this.apiClient.BaseAddress = new Uri("https://webservices.coala.io/");
+
+            Persistence test = Persistence.Instance;
         }
 
         public List<BearMetadata> getBearList()

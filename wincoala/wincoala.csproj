@@ -131,6 +131,7 @@
     <Compile Include="PageLintOnline.xaml.cs">
       <DependentUpon>PageLintOnline.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Persistence.cs" />
     <Compile Include="wincoalaCore.cs" />
     <Page Include="MainWindow.xaml">
       <Generator>MSBuild:Compile</Generator>
