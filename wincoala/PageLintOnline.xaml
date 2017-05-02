@@ -9,21 +9,23 @@
 	Title="PageLintOnline">
     <Page.Resources>
         <coala:ListToVisibilityConverter x:Key="ListToVisibilityConverter" />
-        <coala:DictionaryToVisibilityConverter x:Key="DictionaryToVisibilityConverter" />
+        <coala:StringDictionaryToVisibilityConverter x:Key="StringDictionaryToVisibilityConverter" />
     </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
         <StackPanel Margin="10">
             <AvalonEdit:TextEditor 
                 x:Name="CodeEditor"
-                Height="400"
+                Height="300"
                 ShowLineNumbers="True" 
                 FontFamily="Consolas"
                 BorderBrush="Black" BorderThickness="2"
-                WordWrap="True"
                 ScrollViewer.HorizontalScrollBarVisibility="Auto"
-                xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit">
-            </AvalonEdit:TextEditor>
-
+                Background="#272822"
+                Foreground="White"
+                LineNumbersForeground="#FFC2C2C2"
+                xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit" 
+                VerticalScrollBarVisibility="Auto" 
+                WordWrap="True"/>
             <StackPanel Margin="0,15" Orientation="Horizontal">
                 <ComboBox 
                     Name="Combobox_SelectedBears" 
@@ -37,20 +39,41 @@
                 </ComboBox>
                 <Button Name="Button_RunCoala" Margin="30,0,0,0" Width="100" Content="Run coala" Click="Button_RunCoala_Click" />
             </StackPanel>
-            <ListView x:Name="ListView_Results">
+            <ListView 
+                x:Name="ListView_Results" 
+                Visibility="Hidden" 
+                BorderThickness="0">
+                <ListView.Resources>
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
+                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White" />
+                </ListView.Resources>
                 <ListView.ItemTemplate>
                     <DataTemplate>
-                        <StackPanel>
-                            <TextBlock Text="{Binding message}"/>
-                            <ListView ItemsSource="{Binding snippets}" FontFamily="Consolas" Margin="0,0,10,0" 
-                                Visibility="{Binding snippets, Converter={StaticResource ListToVisibilityConverter}}" />
+                        <StackPanel Background="#b0bec5">
+                            <TextBlock
+                                Margin="15,15,15,15"
+                                Padding="10"
+                                Text="{Binding message}" 
+                                Background="#263238" Foreground="White"/>
+                            <ListView ItemsSource="{Binding snippets}" FontFamily="Consolas" 
+                                Margin="15,0,15,15" 
+                                Visibility="{Binding snippets, Converter={StaticResource ListToVisibilityConverter}}" 
+                                Background="#455a64" Foreground="White" 
+                                BorderThickness="0"/>
                             <TextBlock Text="This error could be automatically fixed by applying the following diffs"
-                                Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}"/>
+                                Margin="15,0,15,0"
+                                Padding="10"
+                                Visibility="{Binding diffs, Converter={StaticResource StringDictionaryToVisibilityConverter}}"
+                                Background="#455a64" Foreground="White"/>
                             <ListView ItemsSource="{Binding diffs}"
-                                Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}">
+                                Margin="15,0,15,15" 
+                                Visibility="{Binding diffs, Converter={StaticResource StringDictionaryToVisibilityConverter}}"
+                                Background="#455a64" Foreground="White" 
+                                BorderThickness="0">
                                 <ListView.ItemTemplate>
                                     <DataTemplate>
-                                        <TextBox Text="{Binding Path=Value, Mode=OneWay}" />
+                                        <TextBox Padding="10" Text="{Binding Path=Value, Mode=OneWay}" Margin="0,0,0,15" />
                                     </DataTemplate>
                                 </ListView.ItemTemplate>
                             </ListView>

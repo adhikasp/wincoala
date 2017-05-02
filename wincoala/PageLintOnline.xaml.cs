@@ -49,6 +49,7 @@ namespace wincoala
             request.file_data = CodeEditor.Text;
             List<Result> results = wincoalaCore.lintOnline(request);
             ListView_Results.ItemsSource = results;
+            ListView_Results.Visibility = Visibility.Visible;
         }
     }
 
@@ -72,14 +73,14 @@ namespace wincoala
             throw new NotImplementedException();
         }
     }
-    
-    [ValueConversion(typeof(Dictionary<object, object>), typeof(Visibility))]
-    public class DictionaryToVisibilityConverter : IValueConverter
+
+    [ValueConversion(typeof(Dictionary<String, String>), typeof(Visibility))]
+    public class StringDictionaryToVisibilityConverter : IValueConverter
     {
         public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
-            if (((Dictionary<object, object>)value) == null ||
-                ((Dictionary<object, object>)value).Keys.ToList().Count == 0)
+            if (((Dictionary<String, String>)value) == null ||
+                ((Dictionary<String, String>)value).Keys.ToList().Count == 0)
             {
                 return Visibility.Collapsed;
             }
