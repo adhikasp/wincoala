@@ -131,5 +131,10 @@ namespace wincoala
                 }
             }
         }
+
+        public BearMetadata getBear(String name)
+        {
+            return persistenceLayer.getBear(name);
+        }
     }
 }

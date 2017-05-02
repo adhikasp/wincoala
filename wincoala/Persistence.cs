@@ -51,5 +51,10 @@ namespace wincoala
             return dbConnection.InsertAll(bears) != 0;
         }
 
+
+        internal BearMetadata getBear(string name)
+        {
+            return dbConnection.Find<BearMetadata>(name);
+        }
     }
 }
