@@ -12,52 +12,52 @@
         <coala:DictionaryToVisibilityConverter x:Key="DictionaryToVisibilityConverter" />
     </Page.Resources>
     <ScrollViewer VerticalScrollBarVisibility="Auto">
-    <StackPanel Margin="10">
-        <AvalonEdit:TextEditor 
-            x:Name="CodeEditor"
-            Height="400"
-            ShowLineNumbers="True" 
-            FontFamily="Consolas"
-            BorderBrush="Black" BorderThickness="2"
-            WordWrap="True"
-            ScrollViewer.HorizontalScrollBarVisibility="Auto"
-            xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit">
-        </AvalonEdit:TextEditor>
+        <StackPanel Margin="10">
+            <AvalonEdit:TextEditor 
+                x:Name="CodeEditor"
+                Height="400"
+                ShowLineNumbers="True" 
+                FontFamily="Consolas"
+                BorderBrush="Black" BorderThickness="2"
+                WordWrap="True"
+                ScrollViewer.HorizontalScrollBarVisibility="Auto"
+                xmlns:AvalonEdit="http://icsharpcode.net/sharpdevelop/avalonedit">
+            </AvalonEdit:TextEditor>
 
-        <StackPanel Margin="0,15" Orientation="Horizontal">
-            <ComboBox 
-                Name="Combobox_SelectedBears" 
-                SelectionChanged="Combobox_SelectedBears_SelectionChanged"
-                Width="200">
-                <ComboBox.ItemTemplate>
+            <StackPanel Margin="0,15" Orientation="Horizontal">
+                <ComboBox 
+                    Name="Combobox_SelectedBears" 
+                    SelectionChanged="Combobox_SelectedBears_SelectionChanged"
+                    Width="200">
+                    <ComboBox.ItemTemplate>
+                        <DataTemplate>
+                            <TextBlock Text="{Binding Name}" />
+                        </DataTemplate>
+                    </ComboBox.ItemTemplate>
+                </ComboBox>
+                <Button Name="Button_RunCoala" Margin="30,0,0,0" Width="100" Content="Run coala" Click="Button_RunCoala_Click" />
+            </StackPanel>
+            <ListView x:Name="ListView_Results">
+                <ListView.ItemTemplate>
                     <DataTemplate>
-                        <TextBlock Text="{Binding Name}" />
+                        <StackPanel>
+                            <TextBlock Text="{Binding message}"/>
+                            <ListView ItemsSource="{Binding snippets}" FontFamily="Consolas" Margin="0,0,10,0" 
+                                Visibility="{Binding snippets, Converter={StaticResource ListToVisibilityConverter}}" />
+                            <TextBlock Text="This error could be automatically fixed by applying the following diffs"
+                                Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}"/>
+                            <ListView ItemsSource="{Binding diffs}"
+                                Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}">
+                                <ListView.ItemTemplate>
+                                    <DataTemplate>
+                                        <TextBox Text="{Binding Path=Value, Mode=OneWay}" />
+                                    </DataTemplate>
+                                </ListView.ItemTemplate>
+                            </ListView>
+                        </StackPanel>
                     </DataTemplate>
-                </ComboBox.ItemTemplate>
-            </ComboBox>
-            <Button Name="Button_RunCoala" Margin="30,0,0,0" Width="100" Content="Run coala" Click="Button_RunCoala_Click" />
-        </StackPanel>
-        <ListView x:Name="ListView_Results">
-            <ListView.ItemTemplate>
-                <DataTemplate>
-                    <StackPanel>
-                        <TextBlock Text="{Binding message}"/>
-                        <ListView ItemsSource="{Binding snippets}" FontFamily="Consolas" Margin="0,0,10,0" 
-                            Visibility="{Binding snippets, Converter={StaticResource ListToVisibilityConverter}}" />
-                        <TextBlock Text="This error could be automatically fixed by applying the following diffs"
-                            Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}"/>
-                        <ListView ItemsSource="{Binding diffs}"
-                            Visibility="{Binding diffs, Converter={StaticResource DictionaryToVisibilityConverter}}">
-                            <ListView.ItemTemplate>
-                                <DataTemplate>
-                                    <TextBox Text="{Binding Path=Value, Mode=OneWay}" />
-                                </DataTemplate>
-                            </ListView.ItemTemplate>
-                        </ListView>
-                    </StackPanel>
-                </DataTemplate>
-            </ListView.ItemTemplate>
-        </ListView>
+                </ListView.ItemTemplate>
+            </ListView>
         </StackPanel>
     </ScrollViewer>
 </Page>
