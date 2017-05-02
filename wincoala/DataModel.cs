@@ -23,26 +23,26 @@ namespace wincoala
         }
     }
 
-    public struct BearListResponse
+    public class BearListResponse
     {
         public String name { get; set; }
         public String desc { get; set; }
         public List<String> languages { get; set; } 
     }
 
-    public struct LintRequest
+    public class LintRequest
     {
         public String bears;
         public String file_data;
     }
 
-    public struct LintResponse
+    public class LintResponse
     {
         public Dictionary<String, List<Result>> results;
         public String success;
     }
 
-    public struct Result
+    public class Result
     {
         public String message; 
         public String origin;
