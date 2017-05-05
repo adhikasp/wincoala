@@ -3,8 +3,8 @@
 ------------------------------------------------------------------------------
 
 wincoala is [coala](https://github.com/coala/coala) GUI for Windows. 
-This program was writen for my university class of *Praktikum Basis Data*
-(Object Oriented Programming Class).
+This program was writen for my university class of *Praktikum Pemrograman
+Berorientasi Objek* (Object Oriented Programming Class).
 
 ### Features
 
