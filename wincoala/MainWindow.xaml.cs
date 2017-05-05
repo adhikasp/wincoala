@@ -24,7 +24,6 @@ namespace wincoala
         public MainWindow()
         {
             InitializeComponent();
-            WincoalaCore wincoalaCore = WincoalaCore.Instance;
             MainFrame.Content = new PageLintOnline();
         }
 
