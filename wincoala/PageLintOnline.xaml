@@ -39,16 +39,11 @@
                 </ComboBox>
                 <Button Name="Button_RunCoala" Margin="30,0,0,0" Width="100" Content="Run coala" Click="Button_RunCoala_Click" />
             </StackPanel>
-            <ListView 
+            <ItemsControl 
                 x:Name="ListView_Results" 
                 Visibility="Hidden" 
                 BorderThickness="0">
-                <ListView.Resources>
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightBrushKey}" Color="Transparent" />
-                    <SolidColorBrush x:Key="{x:Static SystemColors.ControlBrushKey}" Color="Transparent" />
-                    <SolidColorBrush x:Key="{x:Static SystemColors.HighlightTextBrushKey}" Color="White" />
-                </ListView.Resources>
-                <ListView.ItemTemplate>
+                <ItemsControl.ItemTemplate>
                     <DataTemplate>
                         <StackPanel Background="#b0bec5">
                             <TextBlock
@@ -79,8 +74,8 @@
                             </ListView>
                         </StackPanel>
                     </DataTemplate>
-                </ListView.ItemTemplate>
-            </ListView>
+                </ItemsControl.ItemTemplate>
+            </ItemsControl>
         </StackPanel>
     </ScrollViewer>
 </Page>
