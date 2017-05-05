@@ -9,11 +9,12 @@ This program was writen for my university class of *Praktikum Basis Data*
 ### Features
 
 - Lint source code using coala webservices without installing coala locally.
-- Cache the code to reduce duplicate request to webservices.
 - Show list of languages and bears that coala support.
+- Cache list of bears.
 
 ### Future goal
 
+- Cache the online lint result to reduce duplicate request to webservices.
 - Provide option to lint locally.
 - Became a complete GUI to run coala on a local project.
 
